@@ -35,7 +35,7 @@ if any(isnan(X(:))) || any(isnan(T(:)))
     error('[ERROR] El dataset contiene valores NaN.');
 end
 
-warning('off', 'nnet:trainlm:ChangedPerformanceFcn');
+warnState = warning('off', 'nnet:trainlm:ChangedPerformanceFcn');
 fprintf('[OK] Validación completada. (Nota: trainlm usará MSE por compatibilidad).\n\n');
 
 %% -------------------------------------------------------------------------
@@ -129,3 +129,4 @@ end
 fprintf('╚══════════════════════════════════════════════════════╝\n');
 fprintf('\n[✓] Mejor configuración: %s  (%.2f%% en test)\n\n', ...
         configs(iBest).nombre, resultados{iBest}.accTest);
+warning(warnState); % Restaurar configuración de avisos de la sesión

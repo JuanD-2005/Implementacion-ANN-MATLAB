@@ -32,6 +32,7 @@ end
 if any(isnan(X(:))) || any(isnan(T(:)))
     error('[ERROR] El dataset contiene valores NaN. Revise la instalación del Toolbox.');
 end
+warnState = warning('off', 'nnet:trainlm:ChangedPerformanceFcn');
 fprintf('[OK] Validación de integridad completada (sin NaN).\n\n');
 
 %% -------------------------------------------------------------------------
@@ -68,7 +69,7 @@ for k = 1:nConfigs
         % Se usa '' para evitar el error de "dividenone" en algunas versiones.
         net.divideFcn = '';
     else
-        % -- 3.2  División de datos estándar para trainlm
+        % -- 3.2  División de datos (solo aplica para trainlm; trainbr usa dataset completo)
         net.divideParam.trainRatio = 0.70;
         net.divideParam.valRatio   = 0.15;
         net.divideParam.testRatio  = 0.15;
@@ -166,3 +167,4 @@ end
 fprintf('╚%s╝\n', repmat('═', 1, anchoInterno));
 fprintf('\n[OK] Mejor configuración: %s  (R2=%.4f)\n\n', ...
         configs(iBest).nombre, resultados{iBest}.r2);
+warning(warnState); % Restaurar configuración de avisos de la sesión

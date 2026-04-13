@@ -34,6 +34,7 @@ end
 if any(isnan(X(:)))
     error('[ERROR] El dataset contiene valores NaN.');
 end
+warnState = warning('off', 'nnet:trainlm:ChangedPerformanceFcn');
 fprintf('[OK] Validación de integridad completada (sin NaN).\n\n');
 
 % Índices de clase reales (solo para evaluación posterior, NO usados en entrenamiento)
@@ -158,6 +159,7 @@ fprintf('╚%s╝\n', repmat('═', 1, anchoInterno));
 [~, iBest] = max(cellfun(@(r) r.pureza, resultados));
 fprintf('\n[OK] Mejor topologia: %s  (Pureza=%.4f)\n\n', ...
         configs(iBest).nombre, resultados{iBest}.pureza);
+warning(warnState); % Restaurar configuración de avisos de la sesión
 
 %% =========================================================================
 %  FUNCIÓN LOCAL: Cálculo de Pureza del Clustering
