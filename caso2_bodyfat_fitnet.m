@@ -59,14 +59,16 @@ for k = 1:nConfigs
 
     fprintf('--- %s ---\n', configs(k).nombre);
 
-    % -- 3.1  Creación de la red de ajuste (función de activación tansig + purelin)
+    % -- 3.1  Creación de la red de ajuste
     net = fitnet(configs(k).hiddenSize, configs(k).trainFcn);
 
-    % CAMBIO: trainbr usa todos los datos internamente; divideFcn se desactiva.
+    % CAMBIO: Manejo de división de datos según el algoritmo
     if strcmp(configs(k).trainFcn, 'trainbr')
-        net.divideFcn = 'dividenone';
+        % trainbr usa regularización interna; se desactiva la división.
+        % Se usa '' para evitar el error de "dividenone" en algunas versiones.
+        net.divideFcn = '';
     else
-        % -- 3.2  División de datos
+        % -- 3.2  División de datos estándar para trainlm
         net.divideParam.trainRatio = 0.70;
         net.divideParam.valRatio   = 0.15;
         net.divideParam.testRatio  = 0.15;
@@ -81,9 +83,17 @@ for k = 1:nConfigs
     % -- 3.4  Entrenamiento
     [net, tr] = train(net, X, T);
 
-    % -- 3.5  Evaluación sobre el conjunto de prueba
-    Xtest = X(:, tr.testInd);
-    Ttest = T(:, tr.testInd);
+    % -- 3.5  Evaluación
+    % IMPORTANTE: Si divideFcn es '', tr.testInd estará vacío.
+    % En ese caso, evaluamos sobre todo el dataset para la Config B.
+    if isempty(tr.testInd)
+        Xtest = X;
+        Ttest = T;
+    else
+        Xtest = X(:, tr.testInd);
+        Ttest = T(:, tr.testInd);
+    end
+
     Ytest = net(Xtest);
 
     % Métricas de regresión
@@ -94,9 +104,9 @@ for k = 1:nConfigs
     r2      = 1 - ss_res / ss_tot;
 
     fprintf('  Épocas entrenadas  : %d\n',        tr.num_epochs);
-    fprintf('  MSE  (test)        : %.6f\n',       mse_val);
-    fprintf('  RMSE (test)        : %.6f\n',       rmse);
-    fprintf('  R²   (test)        : %.4f\n\n',     r2);
+    fprintf('  MSE  (eval)        : %.6f\n',       mse_val);
+    fprintf('  RMSE (eval)        : %.6f\n',       rmse);
+    fprintf('  R²   (eval)        : %.4f\n\n',     r2);
 
     resultados{k} = struct('net', net, 'tr', tr, ...
                            'Ytest', Ytest, 'Ttest', Ttest, ...
@@ -133,13 +143,26 @@ title(sprintf('Distribución de Residuos – %s', configs(iBest).nombre));
 xline(0, '--r', 'LineWidth', 1.5);
 
 % 4.4 Resumen en consola
-fprintf('╔══════════════════════════════════════════════════════════╗\n');
-fprintf('║            RESUMEN COMPARATIVO – CASO 2                 ║\n');
-fprintf('╠══════════════════════════════════════════════════════════╣\n');
+tituloResumen = 'RESUMEN COMPARATIVO - CASO 2';
+lineasResumen = cell(nConfigs, 1);
 for k = 1:nConfigs
-    fprintf('║  %-35s  MSE: %.5f  R²: %.4f ║\n', ...
-            configs(k).nombre, resultados{k}.mse, resultados{k}.r2);
+    lineasResumen{k} = sprintf('  %-30s  MSE: %8.5f  R2: %7.4f  ', ...
+                               configs(k).nombre, resultados{k}.mse, resultados{k}.r2);
 end
-fprintf('╚══════════════════════════════════════════════════════════╝\n');
-fprintf('\n[✓] Mejor configuración: %s  (R²=%.4f)\n\n', ...
+
+anchoInterno = max([length(tituloResumen), cellfun(@length, lineasResumen)']);
+
+% Centrado manual del título para mantener la caja alineada en consola.
+padIzq = floor((anchoInterno - length(tituloResumen)) / 2);
+padDer = anchoInterno - length(tituloResumen) - padIzq;
+tituloCentrado = [repmat(' ', 1, padIzq), tituloResumen, repmat(' ', 1, padDer)];
+
+fprintf('╔%s╗\n', repmat('═', 1, anchoInterno));
+fprintf('║%s║\n', tituloCentrado);
+fprintf('╠%s╣\n', repmat('═', 1, anchoInterno));
+for k = 1:nConfigs
+    fprintf('║%-*s║\n', anchoInterno, lineasResumen{k});
+end
+fprintf('╚%s╝\n', repmat('═', 1, anchoInterno));
+fprintf('\n[OK] Mejor configuración: %s  (R2=%.4f)\n\n', ...
         configs(iBest).nombre, resultados{iBest}.r2);

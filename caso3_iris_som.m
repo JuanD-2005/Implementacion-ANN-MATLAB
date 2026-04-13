@@ -133,17 +133,30 @@ for k = 1:nConfigs
 end
 
 % 4.4 Resumen en consola
-fprintf('╔══════════════════════════════════════════════════════════╗\n');
-fprintf('║            RESUMEN COMPARATIVO – CASO 3                 ║\n');
-fprintf('╠══════════════════════════════════════════════════════════╣\n');
+tituloResumen = 'RESUMEN COMPARATIVO - CASO 3';
+lineasResumen = cell(nConfigs, 1);
 for k = 1:nConfigs
-    fprintf('║  %-30s  Pureza: %.4f  QErr: %.5f ║\n', ...
-            configs(k).nombre, resultados{k}.pureza, resultados{k}.qError);
+    lineasResumen{k} = sprintf('  %-24s  Pureza: %7.4f  QErr: %8.5f  ', ...
+                               configs(k).nombre, resultados{k}.pureza, resultados{k}.qError);
 end
-fprintf('╚══════════════════════════════════════════════════════════╝\n');
+
+anchoInterno = max([length(tituloResumen), cellfun(@length, lineasResumen)']);
+
+% Centrado manual del titulo para mantener la caja alineada en consola.
+padIzq = floor((anchoInterno - length(tituloResumen)) / 2);
+padDer = anchoInterno - length(tituloResumen) - padIzq;
+tituloCentrado = [repmat(' ', 1, padIzq), tituloResumen, repmat(' ', 1, padDer)];
+
+fprintf('╔%s╗\n', repmat('═', 1, anchoInterno));
+fprintf('║%s║\n', tituloCentrado);
+fprintf('╠%s╣\n', repmat('═', 1, anchoInterno));
+for k = 1:nConfigs
+    fprintf('║%-*s║\n', anchoInterno, lineasResumen{k});
+end
+fprintf('╚%s╝\n', repmat('═', 1, anchoInterno));
 
 [~, iBest] = max(cellfun(@(r) r.pureza, resultados));
-fprintf('\n[✓] Mejor topología: %s  (Pureza=%.4f)\n\n', ...
+fprintf('\n[OK] Mejor topologia: %s  (Pureza=%.4f)\n\n', ...
         configs(iBest).nombre, resultados{iBest}.pureza);
 
 %% =========================================================================
