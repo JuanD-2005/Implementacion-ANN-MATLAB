@@ -4,60 +4,58 @@
 ![Deep Learning Toolbox](https://img.shields.io/badge/Deep_Learning_Toolbox-Required-orange?style=for-the-badge)
 ![Project Type](https://img.shields.io/badge/Portfolio-AI%20%7C%20ML-success?style=for-the-badge)
 
-End-to-end MATLAB portfolio project with three Artificial Neural Network workflows:
+End-to-end MATLAB portfolio project with three Artificial Neural Network workflows: classification, regression, and unsupervised clustering.
 
-- Binary classification (Pattern Recognition Network).
-- Continuous regression (Fitting Network).
-- Unsupervised clustering (Self-Organizing Map).
+## Index / Indice
 
-Built as an academic AI evaluation with reproducible experiments and comparative analysis.
+- [Espanol](#espanol)
+- [English](#english)
 
-## ES | Resumen rapido
+---
 
-Este portafolio demuestra el uso practico de redes neuronales en tres tareas clasicas de Machine Learning:
+## Espanol
 
-1. Clasificacion binaria de cancer de mama.
-2. Regresion de porcentaje de grasa corporal.
-3. Clustering topologico de Iris con SOM.
+### Resumen
 
-Informacion pertinente (fundamentacion teorica, metodologia completa, analisis y discusion de resultados): ver el PDF del repositorio, Implementar ANN con MATLAB - Juan Paredes.pdf
+Este repositorio muestra una implementacion completa de redes neuronales artificiales en MATLAB para tres tareas clasicas de Machine Learning:
 
-## EN | Quick overview
+1. Clasificacion binaria de cancer de mama con patternnet.
+2. Regresion de porcentaje de grasa corporal con fitnet.
+3. Clustering no supervisado de Iris con selforgmap (SOM).
 
-This portfolio demonstrates practical neural-network workflows across three classic ML tasks:
+El proyecto fue desarrollado con enfoque de portafolio tecnico y evaluacion academica, priorizando comparacion experimental, interpretacion de metricas y reproducibilidad.
 
-1. Breast cancer binary classification.
-2. Body fat percentage regression.
-3. Iris topological clustering with SOM.
+### Objetivos
 
-Pertinent technical information (theory, full methodology, detailed analysis, and discussion): see the repository PDF, Implementar ANN con MATLAB - Juan Paredes.pdf
+1. Implementar y entrenar modelos ANN en problemas supervisados y no supervisados.
+2. Comparar configuraciones de entrenamiento y arquitectura.
+3. Analizar el impacto de regularizacion y topologia en el rendimiento.
+4. Presentar resultados de forma reproducible y visual.
 
-## Repository map
+### Estructura del repositorio
 
 ```text
 .
-|- caso1_cancer_patternnet.m   # Classification
-|- caso2_bodyfat_fitnet.m      # Regression
-|- caso3_iris_som.m            # Clustering (SOM)
+|- caso1_cancer_patternnet.m   # Clasificacion
+|- caso2_bodyfat_fitnet.m      # Regresion
+|- caso3_iris_som.m            # Clustering SOM
 `- README.md
 ```
 
-## Project highlights
+### Casos y hallazgos clave
 
-| Case | Model | Goal | Key metric (reported) |
+| Caso | Modelo | Objetivo | Metrica destacada (reportada) |
 |---|---|---|---|
-| 1 | patternnet | Binary classification | Test accuracy near 98% |
-| 2 | fitnet | Regression | R2 improved from 0.5915 to 0.8038 |
-| 3 | selforgmap | Unsupervised clustering | Purity up to 97.33% |
+| 1 | patternnet | Clasificacion binaria | Precision de prueba cercana a 98% |
+| 2 | fitnet | Regresion | R2 mejora de 0.5915 a 0.8038 |
+| 3 | selforgmap | Clustering no supervisado | Pureza hasta 97.33% |
 
-## Quick start
+### Requisitos
 
-### Requirements
-
-- MATLAB R2018b or newer.
+- MATLAB R2018b o superior.
 - Deep Learning Toolbox.
 
-### Run all experiments
+### Ejecucion
 
 ```matlab
 caso1_cancer_patternnet
@@ -65,19 +63,83 @@ caso2_bodyfat_fitnet
 caso3_iris_som
 ```
 
-All scripts set rng(42) for reproducibility.
+Todos los scripts usan rng(42) para reproducibilidad.
 
-## Outputs you will get
+### Salidas esperadas
 
-- Confusion matrices and training-performance curves.
+- Matrices de confusion y curvas de rendimiento.
+- Graficas de regresion y analisis de residuos.
+- Visualizaciones SOM (U-Matrix) y metricas de pureza.
+
+### Documento tecnico del proyecto
+
+La informacion pertinente (marco teorico, metodologia completa, resultados y discusion) se encuentra en el PDF del repositorio: [Implementar ANN con Matlab - Juan Paredes.pdf](Implementar%20ANN%20con%20Matlab%20-%20Juan%20Paredes.pdf).
+
+---
+
+## English
+
+### Overview
+
+This repository presents a complete MATLAB ANN implementation for three core Machine Learning tasks:
+
+1. Breast cancer binary classification with patternnet.
+2. Body fat percentage regression with fitnet.
+3. Iris unsupervised clustering with selforgmap (SOM).
+
+The project was built as a technical portfolio and academic evaluation, focusing on experimental comparison, metric interpretation, and reproducibility.
+
+### Objectives
+
+1. Implement and train ANN models for supervised and unsupervised tasks.
+2. Compare training configurations and network architectures.
+3. Analyze the effect of regularization and map topology on performance.
+4. Provide reproducible, visualization-driven results.
+
+### Repository structure
+
+```text
+.
+|- caso1_cancer_patternnet.m   # Classification
+|- caso2_bodyfat_fitnet.m      # Regression
+|- caso3_iris_som.m            # SOM clustering
+`- README.md
+```
+
+### Cases and key findings
+
+| Case | Model | Goal | Highlight metric (reported) |
+|---|---|---|---|
+| 1 | patternnet | Binary classification | Test accuracy near 98% |
+| 2 | fitnet | Regression | R2 improved from 0.5915 to 0.8038 |
+| 3 | selforgmap | Unsupervised clustering | Purity up to 97.33% |
+
+### Requirements
+
+- MATLAB R2018b or newer.
+- Deep Learning Toolbox.
+
+### Run
+
+```matlab
+caso1_cancer_patternnet
+caso2_bodyfat_fitnet
+caso3_iris_som
+```
+
+All scripts use rng(42) for reproducibility.
+
+### Expected outputs
+
+- Confusion matrices and performance curves.
 - Regression plots and residual analysis.
-- SOM topology visualization (U-Matrix style plots) and cluster purity metrics.
+- SOM visualizations (U-Matrix) and purity metrics.
 
-## Why this portfolio is useful
+### Project technical document
 
-- Shows supervised and unsupervised ANN workflows in one place.
-- Uses canonical MATLAB datasets for transparent benchmarking.
-- Includes practical concerns: compatibility handling, metric comparison, and experiment reproducibility.
+The pertinent information (theoretical background, full methodology, results, and discussion) is available in the repository PDF: [Implementar ANN con Matlab - Juan Paredes.pdf](Implementar%20ANN%20con%20Matlab%20-%20Juan%20Paredes.pdf).
+
+---
 
 ## Author
 
