@@ -1,82 +1,63 @@
-# Redes Neuronales Artificiales con MATLAB / Artificial Neural Networks with MATLAB
+# ANN Portfolio in MATLAB
 
 ![MATLAB](https://img.shields.io/badge/MATLAB-R2018b%2B-blue?style=for-the-badge)
-![AI](https://img.shields.io/badge/Artificial_Intelligence-Neural_Networks-orange?style=for-the-badge)
-![UNET](https://img.shields.io/badge/UNET-Electronic_Engineering-success?style=for-the-badge)
+![Deep Learning Toolbox](https://img.shields.io/badge/Deep_Learning_Toolbox-Required-orange?style=for-the-badge)
+![Project Type](https://img.shields.io/badge/Portfolio-AI%20%7C%20ML-success?style=for-the-badge)
 
----
+End-to-end MATLAB portfolio project with three Artificial Neural Network workflows:
 
-## ES - Descripcion General
+- Binary classification (Pattern Recognition Network).
+- Continuous regression (Fitting Network).
+- Unsupervised clustering (Self-Organizing Map).
 
-Este repositorio presenta la implementacion y comparacion de tres arquitecturas de Redes Neuronales Artificiales en MATLAB, cubriendo:
+Built as an academic AI evaluation with reproducible experiments and comparative analysis.
 
-1. Clasificacion binaria con patternnet.
-2. Regresion con fitnet.
-3. Clustering no supervisado con selforgmap (SOM).
+## ES | Resumen rapido
 
-El proyecto fue desarrollado como evaluacion practica academica en el area de Inteligencia Artificial.
+Este portafolio demuestra el uso practico de redes neuronales en tres tareas clasicas de Machine Learning:
 
-### Informacion tecnica relevante
+1. Clasificacion binaria de cancer de mama.
+2. Regresion de porcentaje de grasa corporal.
+3. Clustering topologico de Iris con SOM.
 
-La informacion pertinente, el analisis metodologico completo, la fundamentacion teorica y la discusion detallada de resultados se encuentran en el PDF del repositorio (Informe_Evaluacion6.pdf).
+Informacion pertinente (fundamentacion teorica, metodologia completa, analisis y discusion de resultados): ver el PDF del repositorio, Implementar ANN con MATLAB - Juan Paredes.pdf
 
-### Estructura
+## EN | Quick overview
 
-```text
-.
-|- caso1_cancer_patternnet.m
-|- caso2_bodyfat_fitnet.m
-|- caso3_iris_som.m
-`- README.md
-```
+This portfolio demonstrates practical neural-network workflows across three classic ML tasks:
 
-### Requisitos
+1. Breast cancer binary classification.
+2. Body fat percentage regression.
+3. Iris topological clustering with SOM.
 
-- MATLAB R2018b o superior.
-- Deep Learning Toolbox (antes Neural Network Toolbox).
+Pertinent technical information (theory, full methodology, detailed analysis, and discussion): see the repository PDF, Implementar ANN con MATLAB - Juan Paredes.pdf
 
-### Ejecucion
-
-```matlab
-caso1_cancer_patternnet
-caso2_bodyfat_fitnet
-caso3_iris_som
-```
-
-Nota: Todos los scripts usan rng(42) para reproducibilidad.
-
----
-
-## EN - Overview
-
-This repository implements and compares three Artificial Neural Network architectures in MATLAB:
-
-1. Binary classification with patternnet.
-2. Continuous regression with fitnet.
-3. Unsupervised clustering with selforgmap (SOM).
-
-This work was developed as an academic practical evaluation in Artificial Intelligence.
-
-### Relevant technical information
-
-The pertinent information, full methodological analysis, theoretical background, and detailed discussion of results are provided in the repository PDF (Informe_Evaluacion6.pdf).
-
-### Structure
+## Repository map
 
 ```text
 .
-|- caso1_cancer_patternnet.m
-|- caso2_bodyfat_fitnet.m
-|- caso3_iris_som.m
+|- caso1_cancer_patternnet.m   # Classification
+|- caso2_bodyfat_fitnet.m      # Regression
+|- caso3_iris_som.m            # Clustering (SOM)
 `- README.md
 ```
+
+## Project highlights
+
+| Case | Model | Goal | Key metric (reported) |
+|---|---|---|---|
+| 1 | patternnet | Binary classification | Test accuracy near 98% |
+| 2 | fitnet | Regression | R2 improved from 0.5915 to 0.8038 |
+| 3 | selforgmap | Unsupervised clustering | Purity up to 97.33% |
+
+## Quick start
 
 ### Requirements
 
 - MATLAB R2018b or newer.
-- Deep Learning Toolbox (formerly Neural Network Toolbox).
+- Deep Learning Toolbox.
 
-### Run
+### Run all experiments
 
 ```matlab
 caso1_cancer_patternnet
@@ -84,12 +65,23 @@ caso2_bodyfat_fitnet
 caso3_iris_som
 ```
 
-Note: All scripts set rng(42) for reproducibility.
+All scripts set rng(42) for reproducibility.
 
----
+## Outputs you will get
 
-## Autor / Author
+- Confusion matrices and training-performance curves.
+- Regression plots and residual analysis.
+- SOM topology visualization (U-Matrix style plots) and cluster purity metrics.
+
+## Why this portfolio is useful
+
+- Shows supervised and unsupervised ANN workflows in one place.
+- Uses canonical MATLAB datasets for transparent benchmarking.
+- Includes practical concerns: compatibility handling, metric comparison, and experiment reproducibility.
+
+## Author
 
 Juan Diego Paredes Gamez  
-Estudiante de Ingenieria Electronica - UNET  
 Electronic Engineering Student - UNET
+
+If this project helped you, consider leaving a star.
